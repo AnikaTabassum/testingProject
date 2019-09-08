@@ -24,6 +24,7 @@ class ContactsArrayList {
 	UsingContactsFile contactsFile = new UsingContactsFile(fileName);
 	ContactsLinkedCollection contactList = contactsFile.importContactListCSV();
 	ContactsArrayCollection searchReturn = contactList.getAll("anika");
+	
 	@Test
 	void getIndexTest1() {
 		int i=1;
@@ -34,8 +35,6 @@ class ContactsArrayList {
 	               searchReturn.getIndex(i).getStreetAddress()+" "+
 	               searchReturn.getIndex(i).getEmail()+" "+
 	               searchReturn.getIndex(i).getPhoneNumber()+"\n";
-		
-		System.out.println(actual);
 		
 		String expected="anika" + " "+ "anika"+" "+"tabassum"+" "+"123456"+" "+"3333"+" "+"2222"+"\n";
 		assertEquals(expected, actual);
@@ -60,6 +59,7 @@ class ContactsArrayList {
 		assertEquals(expected, actual);
 		
 	}
+	
 	@Test
 	void getIndexTestMin() {
 		ContactsArrayCollection searchReturn3 = contactList.getAll("Cogilith");
@@ -101,7 +101,7 @@ class ContactsArrayList {
 	@Test
 	void getIndexTestMax() {
 		ContactsArrayCollection searchReturn3 = contactList.getAll("Cogilith");
-		int i=searchReturn3.size()-1;
+		int i=26;
 		String actual="";
 		actual+=searchReturn3.getIndex(i).getBusinessName()+" "+
 	               searchReturn3.getIndex(i).getFirstName()+" "+
@@ -147,23 +147,51 @@ class ContactsArrayList {
 	               searchReturn3.getIndex(i).getStreetAddress()+" "+
 	               searchReturn3.getIndex(i).getEmail()+" "+
 	               searchReturn3.getIndex(i).getPhoneNumber()+"\n";
+		String expected="Cogilith" + " "+ "Albina"+" "+"Cordery"+" "+"301 Rowland Point"+" "+"acordery1u@google.de"+" "+"5242086325"+"\n";
+		assertEquals(expected, actual);
 		
-		System.out.println("max" +actual);
+	}
+	
+	@Test
+	void getIndexTestMaxPlus() {
+		ContactsArrayCollection searchReturn3 = contactList.getAll("Cogilith");
+		int i=searchReturn3.size();
+		String actual="";
+		actual+=searchReturn3.getIndex(i).getBusinessName()+" "+
+	               searchReturn3.getIndex(i).getFirstName()+" "+
+	               searchReturn3.getIndex(i).getLastName()+" "+
+	               searchReturn3.getIndex(i).getStreetAddress()+" "+
+	               searchReturn3.getIndex(i).getEmail()+" "+
+	               searchReturn3.getIndex(i).getPhoneNumber()+"\n";
 		
 		String expected="Cogilith" + " "+ "Albina"+" "+"Cordery"+" "+"301 Rowland Point"+" "+"acordery1u@google.de"+" "+"5242086325"+"\n";
 		assertEquals(expected, actual);
 		
 	}
 	
-	
+	@Test
+	void getIndexTestMinMinus() {
+		ContactsArrayCollection searchReturn3 = contactList.getAll("Cogilith");
+		int i=-1;
+		String actual="";
+		actual+=searchReturn3.getIndex(i).getBusinessName()+" "+
+	               searchReturn3.getIndex(i).getFirstName()+" "+
+	               searchReturn3.getIndex(i).getLastName()+" "+
+	               searchReturn3.getIndex(i).getStreetAddress()+" "+
+	               searchReturn3.getIndex(i).getEmail()+" "+
+	               searchReturn3.getIndex(i).getPhoneNumber()+"\n";
+		
+		String expected="Cogilith" + " "+ "Albina"+" "+"Cordery"+" "+"301 Rowland Point"+" "+"acordery1u@google.de"+" "+"5242086325"+"\n";
+		assertEquals(expected, actual);
+		
+	}
 	
 	@Test
 	void sortElementTest1() {
-		//int arr[]= {5,2,1,10,9,10,7,2,3,45};
-		
+
 		searchReturn.sortElements(1,1);
 		String actual = "";
-       for(int i = 0; i < searchReturn.size(); i++) {
+		for(int i = 0; i < searchReturn.size(); i++) {
     	   actual+=searchReturn.getIndex(i).getBusinessName()+" "+
                    searchReturn.getIndex(i).getFirstName()+" "+
                    searchReturn.getIndex(i).getLastName()+" "+
@@ -171,10 +199,8 @@ class ContactsArrayList {
                    searchReturn.getIndex(i).getEmail()+" "+
                    searchReturn.getIndex(i).getPhoneNumber()+"\n";
          }
-       //System.out.println(actual);
 		String expected="anika" + " "+ "anika"+" "+"tabassum"+" "+"123456"+" "+"3333"+" "+"2222"+"\n"+
 				"anikaHr" + " "+ "anika"+" "+"hridita"+" "+"99999"+" "+"12345"+" "+"77777"+"\n";
-		//System.out.println(expected);
 		
 		assertEquals(expected, actual);
 	}
@@ -192,11 +218,8 @@ class ContactsArrayList {
                    searchReturn.getIndex(i).getEmail()+" "+
                    searchReturn.getIndex(i).getPhoneNumber()+"\n";
          }
-       //System.out.println(actual);
 		String expected="anikaHr" + " "+ "anika"+" "+"hridita"+" "+"99999"+" "+"12345"+" "+"77777"+"\n"+
 				"anika" + " "+ "anika"+" "+"tabassum"+" "+"123456"+" "+"3333"+" "+"2222"+"\n";
-		//System.out.println(expected);
-
 		assertEquals(expected, actual);
 	}
 	
@@ -213,18 +236,14 @@ class ContactsArrayList {
                    searchReturn.getIndex(i).getEmail()+" "+
                    searchReturn.getIndex(i).getPhoneNumber()+"\n";
          }
-       //System.out.println(actual);
 		String expected="anikaHr" + " "+ "anika"+" "+"hridita"+" "+"99999"+" "+"12345"+" "+"77777"+"\n"+
 				"anika" + " "+ "anika"+" "+"tabassum"+" "+"123456"+" "+"3333"+" "+"2222"+"\n";
-		//System.out.println(expected);
-		
 		assertEquals(expected, actual);
 	}
 	@Test
 	void sortElementTest4() {
-		//int arr[]= {5,2,1,10,9,10,7,2,3,45};
-		
-		searchReturn.sortElements(1,1);
+
+		searchReturn.sortElements(2,2);
 		
 		String actual = "";
 	   for(int i = 0; i < searchReturn.size(); i++) {
@@ -235,20 +254,16 @@ class ContactsArrayList {
 	               searchReturn.getIndex(i).getEmail()+" "+
 	               searchReturn.getIndex(i).getPhoneNumber()+"\n";
 	     }
-	   //System.out.println(actual);
 		String expected="anika" + " "+ "anika"+" "+"tabassum"+" "+"123456"+" "+"3333"+" "+"2222"+"\n"+
 				"anikaHr" + " "+ "anika"+" "+"hridita"+" "+"99999"+" "+"12345"+" "+"77777"+"\n";
-		//System.out.println(expected);
-		
 		assertEquals(expected, actual);
 	}
 	
 	@Test
 	void removeElementTest() {
 		int expected=searchReturn.size()-1;
-		//System.out.println("sized "+expected);
 		int actual=searchReturn.removeElementByIndex(0);
-		assertEquals(expected, actual, "match");
+		assertEquals(expected, actual);
 	}
 	
 	@Test
@@ -263,13 +278,9 @@ class ContactsArrayList {
 		               searchReturn.getIndex(i).getEmail()+" "+
 		               searchReturn.getIndex(i).getPhoneNumber()+"\n";
 		     }
-		//System.out.println(actual);
 		String expected="anikaHr" + " "+ "anika"+" "+"hridita"+" "+"99999"+" "+"12345"+" "+"77777"+"\n"+
 		"anika" + " "+ "anika"+" "+"tabassum"+" "+"123456"+" "+"3333"+" "+"2222"+"\n";
 				;
-		//System.out.println(expected);
-		
-		//System.out.println(searchReturn.getIndex(0).getUniqueID());
 		assertEquals(expected, actual);
 	}
 	
@@ -285,10 +296,8 @@ class ContactsArrayList {
 		               searchReturn.getIndex(i).getEmail()+" "+
 		               searchReturn.getIndex(i).getPhoneNumber()+"\n";
 		     }
-		//System.out.println(actual);
-		String expected="anikaHr" + " "+ "anika"+" "+"hridita"+" "+"99999"+" "+"12345"+" "+"77777"+"\n";
-		//System.out.println(expected);
-		
+
+		String expected="anikaHr" + " "+ "anika"+" "+"hridita"+" "+"99999"+" "+"12345"+" "+"77777"+"\n";	
 		assertEquals(expected, actual);
 	}
 	
@@ -304,18 +313,13 @@ class ContactsArrayList {
 		               searchReturn.getIndex(i).getEmail()+" "+
 		               searchReturn.getIndex(i).getPhoneNumber()+"\n";
 		     }
-		//System.out.println(actual);
 		String expected="anika" + " "+ "anika"+" "+"tabassum"+" "+"123456"+" "+"3333"+" "+"2222"+"\n";
-		//System.out.println(expected);
-		
 		assertEquals(expected, actual);
 	}
 	
 	@Test
-	void filterElementsTest4() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	void filterElementsTest4() {
 		searchReturn.filterElements(2, "hridita");
-		//final java.lang.reflect.Field field = searchReturn.getClass().getDeclaredField("elements");
-        //field.setAccessible(true);
 		String actual="";
 		for(int i = 0; i < searchReturn.size(); i++) {
 			   actual+=searchReturn.getIndex(i).getBusinessName()+" "+
@@ -325,11 +329,7 @@ class ContactsArrayList {
 		               searchReturn.getIndex(i).getEmail()+" "+
 		               searchReturn.getIndex(i).getPhoneNumber()+"\n";
 		     }
-		//System.out.println(actual);
 		String expected="anikaHr" + " "+ "anika"+" "+"hridita"+" "+"99999"+" "+"12345"+" "+"77777"+"\n";
-		//assertEquals(expected, field.get(searchReturn));
-		//System.out.println(field.get(searchReturn).toString());
-		
 		assertEquals(expected, actual);
 	}
 	
